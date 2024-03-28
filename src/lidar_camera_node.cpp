@@ -346,7 +346,7 @@ void callback(const boost::shared_ptr<const sensor_msgs::PointCloud2>& in_pc2_ms
 		point.b = (int)color[0];
 
 		pc_color->points.push_back(point);
-		cv::circle(cv_ptr->image, cv::Point(px_data, py_data), 1, cv::Scalar(0, 0, 0, 100), cv::FILLED);
+//		cv::circle(cv_ptr->image, cv::Point(px_data, py_data), 1, cv::Scalar(0, 0, 0, 100), cv::FILLED);
 //		try {
 //			cv::circle(cv_ptr->image, cv::Point(py_data, px_data), 1, cv::Scalar(255 - color_dis_x, (int)(color_dis_z), color_dis_z), cv::FILLED);
 //		}
@@ -362,7 +362,7 @@ void callback(const boost::shared_ptr<const sensor_msgs::PointCloud2>& in_pc2_ms
 	pc_color->header.frame_id = "velodyne";
 	pc_pub.publish(pc_color);
 
-	pcOnimg_pub.publish(cv_ptr->toImageMsg());
+//	pcOnimg_pub.publish(cv_ptr->toImageMsg());
 }
 
 int main(int argc, char** argv)
@@ -383,6 +383,11 @@ int main(int argc, char** argv)
 	nh.getParam("/x_resolution", angular_resolution_x);
 	nh.getParam("/y_interpolation", interpol_value);
 	nh.getParam("/ang_Y_resolution", angular_resolution_y);
+
+	nh.getParam("/matrix_file/pcTopic", pcTopic);
+	nh.getParam("/matrix_file/imgTopic", imgTopic);
+
+	std::cout << pcTopic << ", " << imgTopic << std::endl;
 
 	XmlRpc::XmlRpcValue param;
 	nh.getParam("/matrix_file/camera_matrix", param);
