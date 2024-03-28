@@ -385,9 +385,9 @@ int main(int argc, char** argv)
 	nh.getParam("/ang_Y_resolution", angular_resolution_y);
 
 	nh.getParam("/matrix_file/pcTopic", pcTopic);
+	ROS::INFO("Point Cloud Topic: %s", pcTopic.c_str());
 	nh.getParam("/matrix_file/imgTopic", imgTopic);
-
-	std::cout << pcTopic << ", " << imgTopic << std::endl;
+	ROS::INFO("Image Topic: %s", imgTopic.c_str())
 
 	XmlRpc::XmlRpcValue param;
 	nh.getParam("/matrix_file/camera_matrix", param);
