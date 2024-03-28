@@ -387,7 +387,7 @@ int main(int argc, char** argv)
 	nh.getParam("/matrix_file/pcTopic", pcTopic);
 	ROS_INFO("Point Cloud Topic: %s", pcTopic.c_str());
 	nh.getParam("/matrix_file/imgTopic", imgTopic);
-	ROS_INFO("Image Topic: %s", imgTopic.c_str())
+	ROS_INFO("Image Topic: %s", imgTopic.c_str());
 
 	XmlRpc::XmlRpcValue param;
 	nh.getParam("/matrix_file/camera_matrix", param);
