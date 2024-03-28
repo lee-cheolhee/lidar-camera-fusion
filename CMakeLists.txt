@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.0.2)
-project(lidar_camera_fusion)
+project(lidar-camera-fusion)
 
 set(CMAKE_BUILD_TYPE "Release")
 set(CMAKE_CXX_FLAGS "-std=c++14")
@@ -62,10 +62,4 @@ target_link_libraries(interpolated_node
    ${OpenCV_LIBRARIES}
    ${Boost_LIBRARIES}
 )
-
-
-
-
-
-
 

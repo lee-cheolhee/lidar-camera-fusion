@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <package format="2">
-  <name>lidar_camera_fusion</name>
+  <name>lidar-camera-fusion</name>
   <version>0.0.0</version>
-  <description>The lidar_camera_fusion package</description>
+  <description>The lidar-camera-fusion package</description>
 
   <!-- One maintainer tag required, multiple allowed, one person per tag -->
   <!-- Example:  -->
