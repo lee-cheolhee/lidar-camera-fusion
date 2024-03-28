@@ -357,7 +357,7 @@ int main(int argc, char** argv)
 
 	nh.getParam("/maxlen", maxlen);
 	nh.getParam("/minlen", minlen);
-	  nh.getParam("/pcTopic", pcTopic);
+//	nh.getParam("/pcTopic", pcTopic);
 	nh.getParam("/x_resolution", angular_resolution_x);
 	nh.getParam("/y_interpolation", interpol_value);
 
@@ -366,9 +366,9 @@ int main(int argc, char** argv)
 	nh.getParam("/max_var", max_var);
 	nh.getParam("/filter_output_pc", f_pc);
 
-//	std::string pcTopic;
-//	nh.getParam("/matrix_file/pcTopic", pcTopic);
-//	ROS_INFO("Point Cloud Topic: %s", pcTopic.c_str());
+	std::string pcTopic;
+	nh.getParam("/matrix_file/pcTopic", pcTopic);
+	ROS_INFO("Point Cloud Topic: %s", pcTopic.c_str());
 
 	ros::Subscriber sub = nh.subscribe<PointCloud>(pcTopic, 10, callback);
 	rangeImage = boost::shared_ptr<pcl::RangeImageSpherical>(new pcl::RangeImageSpherical);

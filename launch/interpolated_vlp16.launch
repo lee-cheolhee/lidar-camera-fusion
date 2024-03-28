@@ -3,7 +3,7 @@
 
     <param name="maxlen"          type="double" value="100.0" />    
     <param name="minlen"          type="double" value="0.0" />    
-    <param name="pcTopic"         type="str"    value="/velodyne_points" />
+<!--     <param name="pcTopic"         type="str"    value="/velodyne_points" /> -->
     
     <param name="x_resolution"    type="double" value="0.25" />
     <param name="y_interpolation" type="double" value="4.0" />
@@ -14,7 +14,7 @@
     <param name="filter_output_pc"    type="bool" value="true" />
 
     <group ns="matrix_file">
-        <rosparam file="$(find lidar-camera-fusion)/cfg/cfg_params.yaml" />
+        <rosparam file="$(find lidar-camera-fusion)/cfg/cfg_params_front.yaml" />
     </group>    
     <node pkg="lidar-camera-fusion" type="interpolated_node" name="interpolated_node" output="screen"/>
 
