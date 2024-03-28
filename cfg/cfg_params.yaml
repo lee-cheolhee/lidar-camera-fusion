@@ -1,5 +1,5 @@
 pcTopic: "/lidar_front/velodyne_points"
-imgTopcic:
+imgTopic: "/rdv_zed/"
 
 
 camera_matrix: [1055.37158203125,    0.0,          1001.4392089843750, 0.0,

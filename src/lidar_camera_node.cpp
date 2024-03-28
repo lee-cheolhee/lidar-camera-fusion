@@ -63,8 +63,8 @@ ros::Publisher pcOnimg_pub;
 ros::Publisher pc_pub;
 
 // input topics 
-std::string imgTopic = "/camera/color/image_raw";
-std::string pcTopic = "/velodyne_points";
+//std::string imgTopic = "/camera/color/image_raw";
+//std::string pcTopic = "/velodyne_points";
 
 //matrix calibration lidar and camera
 Eigen::MatrixXf Mc(3,4);  // camera calibration matrix
@@ -376,16 +376,18 @@ int main(int argc, char** argv)
 	nh.getParam("/minlen", minlen);
 	nh.getParam("/max_ang_FOV", max_FOV);
 	nh.getParam("/min_ang_FOV", min_FOV);
-	nh.getParam("/pcTopic", pcTopic);
-	nh.getParam("/imgTopic", imgTopic);
+//	nh.getParam("/pcTopic", pcTopic);
+//	nh.getParam("/imgTopic", imgTopic);
 	nh.getParam("/max_var", max_var);
 	nh.getParam("/filter_output_pc", f_pc);
 	nh.getParam("/x_resolution", angular_resolution_x);
 	nh.getParam("/y_interpolation", interpol_value);
 	nh.getParam("/ang_Y_resolution", angular_resolution_y);
 
+	std::string pcTopic;
 	nh.getParam("/matrix_file/pcTopic", pcTopic);
 	ROS_INFO("Point Cloud Topic: %s", pcTopic.c_str());
+	std::string imgTopic;
 	nh.getParam("/matrix_file/imgTopic", imgTopic);
 	ROS_INFO("Image Topic: %s", imgTopic.c_str());
 

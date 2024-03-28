@@ -65,7 +65,7 @@ bool f_pc = true;
 
 
 // topics a suscribirse del nodo
-std::string pcTopic = "/velodyne_points";
+//std::string pcTopic = "/velodyne_points";
 
 // range image parametros
 boost::shared_ptr<pcl::RangeImageSpherical> rangeImage;
@@ -350,27 +350,31 @@ void callback(const PointCloud::ConstPtr& msg_pointCloud)
 int main(int argc, char** argv)
 {
 
-  ros::init(argc, argv, "InterpolatedPointCloud");
-  ros::NodeHandle nh;  
-  
-  /// Load Parameters
+	ros::init(argc, argv, "InterpolatedPointCloud");
+	ros::NodeHandle nh;
 
-  nh.getParam("/maxlen", maxlen);
-  nh.getParam("/minlen", minlen);
-  nh.getParam("/pcTopic", pcTopic);
-  nh.getParam("/x_resolution", angular_resolution_x);
-  nh.getParam("/y_interpolation", interpol_value);
+	/// Load Parameters
 
-  nh.getParam("/ang_Y_resolution", angular_resolution_y);
-  nh.getParam("/ang_ground", ang_x_lidar);
-  nh.getParam("/max_var", max_var);  
-  nh.getParam("/filter_output_pc", f_pc);
+	nh.getParam("/maxlen", maxlen);
+	nh.getParam("/minlen", minlen);
+	//  nh.getParam("/pcTopic", pcTopic);
+	nh.getParam("/x_resolution", angular_resolution_x);
+	nh.getParam("/y_interpolation", interpol_value);
 
-  ros::Subscriber sub = nh.subscribe<PointCloud>(pcTopic, 10, callback);
-  rangeImage = boost::shared_ptr<pcl::RangeImageSpherical>(new pcl::RangeImageSpherical);
-  pc_pub = nh.advertise<PointCloud> ("/pc_interpoled", 10);  
-  imgD_pub = nh.advertise<sensor_msgs::Image>("/pc2imageInterpol", 10);
+	nh.getParam("/ang_Y_resolution", angular_resolution_y);
+	nh.getParam("/ang_ground", ang_x_lidar);
+	nh.getParam("/max_var", max_var);
+	nh.getParam("/filter_output_pc", f_pc);
 
-  ros::spin();
+	std::string pcTopic;
+	nh.getParam("/matrix_file/pcTopic", pcTopic);
+	ROS_INFO("Point Cloud Topic: %s", pcTopic.c_str());
+
+	ros::Subscriber sub = nh.subscribe<PointCloud>(pcTopic, 10, callback);
+	rangeImage = boost::shared_ptr<pcl::RangeImageSpherical>(new pcl::RangeImageSpherical);
+	pc_pub = nh.advertise<PointCloud> ("/pc_interpoled", 10);
+	imgD_pub = nh.advertise<sensor_msgs::Image>("/pc2imageInterpol", 10);
+
+	ros::spin();
 
 }
