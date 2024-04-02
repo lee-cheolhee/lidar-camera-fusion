@@ -22,4 +22,4 @@ $ENVS \
 --ipc host \
 --workdir="/root/catkin_ws/src" \
 --name=fusion_ws \
-rdv_fusion:0.1 /bin/bash
+rdv_fusion:v0.1 /bin/bash

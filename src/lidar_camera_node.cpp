@@ -405,14 +405,11 @@ int main(int argc, char** argv)
 	nh.getParam("/matrix_file/tlc", param);
 	Tlc << (double)param[0] ,(double)param[1] ,(double)param[2];
 
-	message_filters::Subscriber<PointCloud2> pc_sub(nh, pcTopic , 1);
-//	message_filters::Subscriber<Image> img_sub(nh, imgTopic, 1);
-	image_transport::ImageTransport it_zed(nh);
-//	image_transport::Subscriber img_sub = it_zed.subscribe("/rdv_zed_image_front/rdv_zed_front/left/image_raw", 100, , this, _1, STEREO_F_LEFT));
-	image_transport::Subscriber img_sub = it_zed.subscribe("/rdv_zed_image_front/rdv_zed_front/left/image_raw", 100, , this, _1);
+	message_filters::Subscriber<sensor_msgs::PointCloud2> pc_sub(nh, pcTopic , 10);
+	message_filters::Subscriber<sensor_msgs::Image> img_sub(nh, imgTopic, 10);
 
-	typedef sync_policies::ApproximateTime<PointCloud2, Image> MySyncPolicy;
-	Synchronizer<MySyncPolicy> sync(MySyncPolicy(10), pc_sub, img_sub);
+	typedef message_filters::sync_policies::ApproximateTime<sensor_msgs::PointCloud2, sensor_msgs::Image> MySyncPolicy;
+	message_filters::Synchronizer<MySyncPolicy> sync(MySyncPolicy(10), pc_sub, img_sub);
 	sync.registerCallback(boost::bind(&callback, _1, _2));
 	rangeImage = boost::shared_ptr<pcl::RangeImageSpherical>(new pcl::RangeImageSpherical);
 
