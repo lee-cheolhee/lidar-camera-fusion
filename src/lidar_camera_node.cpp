@@ -409,7 +409,7 @@ int main(int argc, char** argv)
 //	message_filters::Subscriber<Image> img_sub(nh, imgTopic, 1);
 	image_transport::ImageTransport it_zed(nh);
 //	image_transport::Subscriber img_sub = it_zed.subscribe("/rdv_zed_image_front/rdv_zed_front/left/image_raw", 100, , this, _1, STEREO_F_LEFT));
-	image_transport::Subscriber img_sub = it_zed.subscribe("/rdv_zed_image_front/rdv_zed_front/left/image_raw", 100, , this, _1));
+	image_transport::Subscriber img_sub = it_zed.subscribe("/rdv_zed_image_front/rdv_zed_front/left/image_raw", 100, , this, _1);
 
 	typedef sync_policies::ApproximateTime<PointCloud2, Image> MySyncPolicy;
 	Synchronizer<MySyncPolicy> sync(MySyncPolicy(10), pc_sub, img_sub);
