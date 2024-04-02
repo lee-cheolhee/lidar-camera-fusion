@@ -1,5 +1,6 @@
 <?xml version="1.0"?>
 <launch>
+	<arg name="config_file" default="$(find lidar-camera-fusion)/cfg/cfg_params.yaml"/>
 
     <param name="maxlen"          type="double" value="10.0" />    
     <param name="minlen"          type="double" value="0.0" />    
@@ -16,12 +17,8 @@
     <param name="y_interpolation" type="double" value="10.0" />
     <param name="ang_Y_resolution"    type="double" value="2.05" />
 
-
-
-
-
     <group ns="matrix_file">
-        <rosparam file="$(find lidar-camera-fusion)/cfg/cfg_params.yaml" />
+        <rosparam file="$(arg config_file)" />
     </group>
     
     <node pkg="lidar-camera-fusion" type="lidar_camera_node" name="lidar_camera_node" output="screen"/>

@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<launch>
+        <group ns="front_fusion">
+                <arg name="config_file" default="$(find lidar-camera-fusion)/cfg/cfg_params_front_3.yaml"/>
+                <include file="$(find lidar-camera-fusion)/launch/vlp16OnImg.launch" >
+                        <arg name="config_file" value="$(arg config_file)"/>
+                </include>
+        </group>
+
+        <group ns="rear_fusion">
+                <arg name="config_file" default="$(find lidar-camera-fusion)/cfg/cfg_params_rear_3.yaml"/>
+                <include file="$(find lidar-camera-fusion)/launch/vlp16OnImg.launch" >
+                        <arg name="config_file" value="$(arg config_file)"/>
+                </include>
+        </group>
+</launch>
+~
