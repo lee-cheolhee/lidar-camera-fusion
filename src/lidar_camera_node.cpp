@@ -347,13 +347,6 @@ void callback(const boost::shared_ptr<const sensor_msgs::PointCloud2>& in_pc2_ms
 
 		pc_color->points.push_back(point);
 //		cv::circle(cv_ptr->image, cv::Point(px_data, py_data), 1, cv::Scalar(0, 0, 0, 100), cv::FILLED);
-//		try {
-//			cv::circle(cv_ptr->image, cv::Point(py_data, px_data), 1, cv::Scalar(255 - color_dis_x, (int)(color_dis_z), color_dis_z), cv::FILLED);
-//		}
-//		catch (cv_bridge::Exception& e) {
-//			ROS_ERROR("cv_bridge exception: %s", e.what());
-//			return;
-//		}
 	}
 
 	pc_color->is_dense = true;
@@ -367,11 +360,10 @@ void callback(const boost::shared_ptr<const sensor_msgs::PointCloud2>& in_pc2_ms
 
 int main(int argc, char** argv)
 {
-	ros::init(argc, argv, "pontCloudOntImage");
+	ros::init(argc, argv, "pcImageFusion");
 	ros::NodeHandle nh;
 
 	// Load Parameters
-
 	nh.getParam("/maxlen", maxlen);
 	nh.getParam("/minlen", minlen);
 	nh.getParam("/max_ang_FOV", max_FOV);
@@ -384,10 +376,9 @@ int main(int argc, char** argv)
 	nh.getParam("/y_interpolation", interpol_value);
 	nh.getParam("/ang_Y_resolution", angular_resolution_y);
 
-	std::string pcTopic;
+	std::string pcTopic, imgTopic;
 	nh.getParam("/matrix_file/pcTopic", pcTopic);
 	ROS_INFO("Point Cloud Topic: %s", pcTopic.c_str());
-	std::string imgTopic;
 	nh.getParam("/matrix_file/imgTopic", imgTopic);
 	ROS_INFO("Image Topic: %s", imgTopic.c_str());
 
@@ -413,8 +404,8 @@ int main(int argc, char** argv)
 	sync.registerCallback(boost::bind(&callback, _1, _2));
 	rangeImage = boost::shared_ptr<pcl::RangeImageSpherical>(new pcl::RangeImageSpherical);
 
-	pcOnimg_pub = nh.advertise<sensor_msgs::Image>("/pcOnImage_image", 1);
-	pc_pub = nh.advertise<PointCloud> ("/points2", 1);
+//	pcOnimg_pub = nh.advertise<sensor_msgs::Image>("/pcOnImage_image", 1);
+	pc_pub = nh.advertise<PointCloud> ("/RGBPoints", 1);
 
 	ros::spin();
 }
